@@ -492,6 +492,19 @@
         @media (max-width: 1200px) { .offer-grid, .personalized-grid { grid-template-columns: 1fr 1fr; } }
         @media (max-width: 768px) { .offer-grid, .personalized-grid { grid-template-columns: 1fr; } }
             .mt-10 { margin-top: 10px; }
+        .navbar { position: sticky; top: 0; z-index: 50; backdrop-filter: blur(8px); background: rgba(5,8,20,0.75); border: 1px solid rgba(155,93,229,0.25); margin: 12px 0 18px; border-radius: 14px; padding: 10px 14px; display:flex; align-items:center; justify-content: space-between; }
+        .nav-links { display:flex; gap:10px; flex-wrap:wrap; }
+        .nav-link { padding: 6px 12px; border-radius: 999px; border: 1px solid rgba(155,93,229,0.35); color:#e2e8f0; background: rgba(155,93,229,0.12); cursor:pointer; }
+        .nav-link.active { background: rgba(0,245,212,0.18); border-color: rgba(0,245,212,0.45); color:#fff; }
+        .modal { position: fixed; inset: 0; display:none; align-items:center; justify-content:center; background: rgba(0,0,0,0.55); }
+        .modal.open { display:flex; }
+        .modal-card { width: min(720px, 92vw); background: rgba(20,20,30,0.95); border:1px solid rgba(155,93,229,0.35); border-radius:16px; padding:16px; }
+        .modal-head { display:flex; align-items:center; justify-content: space-between; margin-bottom: 10px; }
+        .wishlist { background: transparent; border: 1px solid rgba(241,91,181,0.5); color: var(--accent); padding: 6px 10px; border-radius: 999px; cursor: pointer; }
+        .sort-bar { display:flex; gap:10px; align-items:center; justify-content:flex-end; }
+        .qty { display:inline-flex; align-items:center; gap:6px; }
+        .qty-btn { width:22px; height:22px; border-radius:6px; border:1px solid rgba(255,255,255,0.25); background: transparent; color:#fff; cursor:pointer; }
+        .hero-bg { background-image: url('https://cdn.builder.io/api/v1/image/assets%2Faeae393b121c48bc965ef344df5e7f0b%2F2d14a9b96eee4abba0efd15d1535ae30?format=webp&width=1200'); background-size:cover; background-position:center; border-radius:18px; }
     </style>
 </head>
 <body>
