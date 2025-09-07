@@ -504,6 +504,27 @@
             </div>
         </header>
 
+            <nav class="navbar">
+                <div class="nav-links">
+                    <button class="nav-link" data-nav="#secHome">Home</button>
+                    <button class="nav-link" data-nav="#secCatalog">Catalog</button>
+                    <button class="nav-link" data-nav="#secFeatured">Offers</button>
+                    <button class="nav-link" data-nav="#secBundles">Bundles</button>
+                    <button class="nav-link" data-nav="#secRewards">Rewards</button>
+                    <button class="nav-link" data-nav="#secCheckout">Cart</button>
+                    <button class="nav-link" data-nav="#diagnosticsMain">Diagnostics</button>
+                </div>
+                <div class="sort-bar">
+                    <label>Sort
+                        <select id="sortBy" class="filter-select" style="width:160px;">
+                            <option value="relevance">Relevance</option>
+                            <option value="price-asc">Price: Low → High</option>
+                            <option value="price-desc">Price: High → Low</option>
+                        </select>
+                    </label>
+                </div>
+            </nav>
+
             <div class="shop-nav">
                 <button class="btn btn-sm" id="tabShop">Shop</button>
                 <button class="btn btn-sm btn-outline" id="tabDiagnostics">Diagnostics</button>
@@ -1052,7 +1073,7 @@
             } else if (balanceScore > 50) {
                 balanceText = '🔄 <strong>Moderate Neural Balance</strong><br>Functional but could benefit from better regulation.';
             } else {
-                balanceText = '��️ <strong>Suboptimal Neural Balance</strong><br>Significant imbalance detected - consider interventions.';
+                balanceText = '⚠️ <strong>Suboptimal Neural Balance</strong><br>Significant imbalance detected - consider interventions.';
             }
             
             const scoreClass = balanceScore > 75 ? 'score-good' : balanceScore > 50 ? 'score-mid' : 'score-bad';
