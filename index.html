@@ -1022,7 +1022,7 @@
                 cognitiveStateText = '💡 <strong>Focused Analytical State</strong><br>Elevated beta waves show active concentration and logical processing.';
                 cognitiveTag = '<span class="tag tag-positive">Optimal Focus</span>';
             } else if (values.alpha > 0.5) {
-                cognitiveStateText = '😌 <strong>Calm Alertness</strong><br>Balanced alpha waves suggest relaxed yet attentive mental state.';
+                cognitiveStateText = '��� <strong>Calm Alertness</strong><br>Balanced alpha waves suggest relaxed yet attentive mental state.';
                 cognitiveTag = '<span class="tag tag-neutral">Relaxed</span>';
             } else {
                 cognitiveStateText = '🌫️ <strong>Diffused Attention</strong><br>Lower frequency dominance may indicate mind-wandering or fatigue.';
@@ -1430,9 +1430,9 @@ Overall cognitive efficiency appears optimal for assessment.`;
             if (!area) return;
             const byId = id => products.find(p=>p.id===id);
             const offers = [
-                {name:'Focus & Study Bundle', save:25, items:['nf','cg','nt']},
-                {name:'Calm & Sleep Pack', save:20, items:['cd','mc','ns']},
-                {name:'Mood & Energy Duo', save:15, items:['nc','hm']}
+                {name:'Focus & Study Bundle', save:25, items:['nf','cg','nt'], img:'https://cdn.builder.io/api/v1/image/assets%2Faeae393b121c48bc965ef344df5e7f0b%2F64906dcfdf4d487988c3f1111f31f405?format=webp&width=800'},
+                {name:'Calm & Sleep Pack', save:20, items:['cd','mc','ns'], img:'https://cdn.builder.io/api/v1/image/assets%2Faeae393b121c48bc965ef344df5e7f0b%2F6df5cb12bbe341d88a07894b0d2da323?format=webp&width=800'},
+                {name:'Mood & Energy Duo', save:15, items:['nc','hm'], img:'https://cdn.builder.io/api/v1/image/assets%2Faeae393b121c48bc965ef344df5e7f0b%2Fd392c26032b846d5a3007540083f94ac?format=webp&width=800'}
             ];
             area.innerHTML = offers.map(o=>{
                 const items = o.items.map(byId);
