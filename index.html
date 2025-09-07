@@ -489,6 +489,7 @@
         .subtle { opacity: .8; }
         @media (max-width: 1200px) { .offer-grid, .personalized-grid { grid-template-columns: 1fr 1fr; } }
         @media (max-width: 768px) { .offer-grid, .personalized-grid { grid-template-columns: 1fr; } }
+            .mt-10 { margin-top: 10px; }
     </style>
 </head>
 <body>
@@ -578,7 +579,7 @@
                     <div class="section-title"><span>🎀 VIP Membership</span></div>
                     <div class="vip-panel">
                         <div>Join NeuroElite Club for $9.99/month — Free shipping, +10% off bundles, early access to drops, and a personalized monthly brain-health plan.</div>
-                        <div class="card-actions" style="margin-top:10px;">
+                        <div class="card-actions mt-10">
                             <button class="btn btn-sm">Join NeuroElite</button>
                         </div>
                     </div>
@@ -614,7 +615,7 @@
                     <div>
                         <div class="section-title"><span>🛒 Cart</span></div>
                         <div class="cart-list" id="cartList"></div>
-                        <div class="card-actions" style="margin-top:10px;">
+                        <div class="card-actions mt-10">
                             <div class="price">Total: $<span id="cartTotal">0</span></div>
                             <button class="btn btn-sm" id="checkoutBtn">Proceed to Checkout</button>
                         </div>
@@ -1447,7 +1448,7 @@ Overall cognitive efficiency appears optimal for assessment.`;
                     <div class="bundle-card">
                         <div class="card-head"><div class="product-name">${b.name}</div><div class="price">$${price} <small class="subtle">(save 15%)</small></div></div>
                         <div class="meta">Includes: ${items.map(i=>i.name).join(' • ')}</div>
-                        <div class="card-actions" style="margin-top:10px;">
+                        <div class="card-actions mt-10">
                             <button class="btn btn-sm" data-bundle="${b.id}">Add Bundle</button>
                             <span>${match}% match</span>
                         </div>
