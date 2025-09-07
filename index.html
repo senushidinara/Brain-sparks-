@@ -463,6 +463,8 @@
         .timer { background: rgba(241,91,181,0.15); border:1px solid rgba(241,91,181,0.35); padding: 6px 10px; border-radius: 999px; }
         .bundle-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
         .bundle-card { padding: 16px; border-radius: 16px; border: 1px solid rgba(155,93,229,0.3); background: rgba(30,31,38,0.75); }
+        .thumbs { display:flex; gap:8px; margin:10px 0; }
+        .thumb { width:52px; height:52px; border-radius:10px; object-fit:cover; border:1px solid rgba(155,93,229,0.35); background: rgba(155,93,229,0.08); }
         .rewards-panel { padding: 16px; border-radius: 16px; border: 1px solid rgba(0,245,212,0.3); background: rgba(0,245,212,0.08); }
         .points { font-size: 1.4rem; color: var(--secondary); font-weight: 800; }
         .checkout { margin-top: 22px; padding: 16px; border: 1px solid rgba(155,93,229,0.3); border-radius: 16px; background: rgba(20,20,30,0.6); display:grid; grid-template-columns: 1.3fr 1fr; gap: 18px; }
@@ -1402,8 +1404,10 @@ Overall cognitive efficiency appears optimal for assessment.`;
                 const items = o.items.map(byId);
                 const price = items.reduce((s,p)=>s+p.price,0);
                 const includes = items.map(i=>i.name).join(' • ');
+                const thumbs = items.map(i=>`<img class=\"thumb\" src=\"${i.img||''}\" alt=\"${i.name}\">`).join('');
                 return `<div class="offer-card">
                     <div class="card-head"><div class="product-name">${o.name}</div><div class="price">Save ${o.save}%</div></div>
+                    <div class="thumbs">${thumbs}</div>
                     <div class="meta">Includes: ${includes}</div>
                     <div class="card-actions"><button class="btn btn-sm" data-offer="${o.items.join(',')}">Add Offer</button><span class="subtle">Est. $${price}</span></div>
                 </div>`;
@@ -1430,7 +1434,7 @@ Overall cognitive efficiency appears optimal for assessment.`;
         function renderBundles(profile){
             const bundles = [
                 {id:'b1', name:'Focus + Memory + Energy Stack', items:['nf','cg','nc']},
-                {id:'b2', name:'Sleep + Relaxation + Mood Stack', items:['ns','mc','hm']}
+                {id:'b2', name:'Sleep + Relaxation + Mood Stack', items:['ns','cd','hm']}
             ];
             const area = document.getElementById('bundles');
             area.innerHTML = '';
@@ -1445,9 +1449,11 @@ Overall cognitive efficiency appears optimal for assessment.`;
                 }),{focus:0,memory:0,sleep:0,mood:0,energy:0});
                 const match = Math.round((agg.focus+agg.memory+agg.sleep+agg.mood+agg.energy)/items.length * 20);
                 const price = items.reduce((s,p)=>s+p.price,0);
+                const thumbs = items.map(i=>`<img class=\"thumb\" src=\"${i.img||''}\" alt=\"${i.name}\">`).join('');
                 area.insertAdjacentHTML('beforeend', `
                     <div class="bundle-card">
                         <div class="card-head"><div class="product-name">${b.name}</div><div class="price">$${price} <small class="subtle">(save 15%)</small></div></div>
+                        <div class="thumbs">${thumbs}</div>
                         <div class="meta">Includes: ${items.map(i=>i.name).join(' • ')}</div>
                         <div class="card-actions mt-10">
                             <button class="btn btn-sm" data-bundle="${b.id}">Add Bundle</button>
