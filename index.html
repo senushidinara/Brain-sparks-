@@ -1316,7 +1316,8 @@ Overall cognitive efficiency appears optimal for assessment.`;
             hm: 'Mood-boosting chews with 5‑HTP, Magnesium, and Vitamin D to support serotonin and balance.',
             ss: 'Smart eye mask combining light therapy and gentle vibrations to guide natural sleep cycles.'
         };
-        products.forEach(p=>{ if(images[p.id]) p.img = images[p.id]; if(descriptions[p.id]) p.desc = descriptions[p.id]; });
+        const nameOverrides = { nt: 'NeuroTrainer Handheld', mw: 'MindWave EEG Headband' };
+        products.forEach(p=>{ if(images[p.id]) p.img = images[p.id]; if(descriptions[p.id]) p.desc = descriptions[p.id]; if(nameOverrides[p.id]) p.name = nameOverrides[p.id]; });
 
         const catalogTargets = {
             'Memory & Focus': document.getElementById('catalogMemory'),
