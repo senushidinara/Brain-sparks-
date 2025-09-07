@@ -510,7 +510,7 @@
             </div>
 
             <section id="shopView">
-                <div class="shop-hero">
+                <div class="shop-hero hero-bg" id="secHome">
                     <div class="section-title"><span>🛍️ NeuroBoutique – Shop Catalog, Offers & Recommendations</span></div>
                     <div class="concierge">
                         <div class="concierge-score" id="conciergeScore">AI Concierge • Focus Score: <strong id="focusScore">72</strong></div>
@@ -1052,7 +1052,7 @@
             } else if (balanceScore > 50) {
                 balanceText = '🔄 <strong>Moderate Neural Balance</strong><br>Functional but could benefit from better regulation.';
             } else {
-                balanceText = '⚠️ <strong>Suboptimal Neural Balance</strong><br>Significant imbalance detected - consider interventions.';
+                balanceText = '��️ <strong>Suboptimal Neural Balance</strong><br>Significant imbalance detected - consider interventions.';
             }
             
             const scoreClass = balanceScore > 75 ? 'score-good' : balanceScore > 50 ? 'score-mid' : 'score-bad';
