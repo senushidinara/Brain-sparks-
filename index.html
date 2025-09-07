@@ -481,6 +481,14 @@
             .recommendations-grid { grid-template-columns: 1fr; }
             .bundle-grid { grid-template-columns: 1fr; }
         }
+            .product-image { width: 100%; height: 110px; object-fit: cover; border-radius: 12px; border: 1px solid rgba(155,93,229,0.35); background: rgba(155,93,229,0.08); }
+        .offer-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:16px; }
+        .offer-card { padding:16px; border-radius:16px; border:1px solid rgba(241,91,181,0.35); background: linear-gradient(135deg, rgba(241,91,181,0.18), rgba(155,93,229,0.15)); display:flex; flex-direction:column; gap:8px; }
+        .vip-panel { padding: 16px; border-radius: 16px; border: 1px solid rgba(0,245,212,0.3); background: linear-gradient(135deg, rgba(0,245,212,0.08), rgba(155,93,229,0.08)); }
+        .personalized-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:16px; }
+        .subtle { opacity: .8; }
+        @media (max-width: 1200px) { .offer-grid, .personalized-grid { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 768px) { .offer-grid, .personalized-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -550,6 +558,11 @@
                 </div>
 
                 <div class="catalog-section">
+                    <div class="section-title"><span>🌟 Featured Offers of the Month</span></div>
+                    <div class="offer-grid" id="featured"></div>
+                </div>
+
+                <div class="catalog-section">
                     <div class="section-title"><span>🧩 Luxurious Neural Bundles</span></div>
                     <div class="bundle-grid" id="bundles"></div>
                 </div>
@@ -559,6 +572,21 @@
                     <div class="rewards-panel">
                         <div>Neural Points: <span class="points" id="points">1,250</span> • Tier: <strong id="tier">Silver</strong></div>
                     </div>
+                </div>
+
+                <div class="catalog-section">
+                    <div class="section-title"><span>🎀 VIP Membership</span></div>
+                    <div class="vip-panel">
+                        <div>Join NeuroElite Club for $9.99/month — Free shipping, +10% off bundles, early access to drops, and a personalized monthly brain-health plan.</div>
+                        <div class="card-actions" style="margin-top:10px;">
+                            <button class="btn btn-sm">Join NeuroElite</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="catalog-section">
+                    <div class="section-title"><span>🎁 Personalized Offers</span></div>
+                    <div class="personalized-grid" id="personalized"></div>
                 </div>
 
                 <div class="catalog-section">
@@ -1258,6 +1286,37 @@ Overall cognitive efficiency appears optimal for assessment.`;
             {id:'hm', name:'HappyMind Chews', category:'Energy & Motivation', type:'Snack', price:19, goals:{focus:0.4, memory:0.2, sleep:0.1, mood:0.8, energy:0.7}, regions:['Ventral Striatum'], badges:['Mood Uplift'], deal:true, bundle:true, icon:'😊'}
         ];
 
+        // Extend catalog with additional products and attach images/descriptions
+        products.push(
+            {id:'cd', name:'CalmNeuro Drops', category:'Stress & Mood', type:'Supplement', price:34, goals:{focus:0.2, memory:0.2, sleep:0.5, mood:0.95, energy:0.2}, regions:['Amygdala'], badges:['Stress Relief'], deal:true, bundle:true, icon:'💧'},
+            {id:'ss', name:'SleepSync Smart Eye Mask', category:'Sleep & Recovery', type:'Gadget', price:89, goals:{focus:0.1, memory:0.2, sleep:0.9, mood:0.6, energy:0.3}, regions:['Thalamus'], badges:['AI Sleep Coach'], deal:true, bundle:true, icon:'😴'}
+        );
+        const images = {
+            nf: 'https://cdn.builder.io/api/v1/image/assets%2Faeae393b121c48bc965ef344df5e7f0b%2F3F839068-7D74-416B-B235-C9BB5015CFAB?format=webp&width=800',
+            cg: 'https://cdn.builder.io/api/v1/image/assets%2Faeae393b121c48bc965ef344df5e7f0b%2F7CD535E3-EC06-48E4-8C77-9BADE2C84105?format=webp&width=800',
+            ns: 'https://cdn.builder.io/api/v1/image/assets%2Faeae393b121c48bc965ef344df5e7f0b%2F644e5711f5034c3dbfb8f059d62d4ecb?format=webp&width=800',
+            mc: 'https://cdn.builder.io/api/v1/image/assets%2Faeae393b121c48bc965ef344df5e7f0b%2Fbb97c380f202401ba447411c32f8e69a?format=webp&width=800',
+            cd: 'https://cdn.builder.io/api/v1/image/assets%2Faeae393b121c48bc965ef344df5e7f0b%2F9fefa10e5e4d4061988ed6598ae6ab90?format=webp&width=800',
+            nc: 'https://cdn.builder.io/api/v1/image/assets%2Faeae393b121c48bc965ef344df5e7f0b%2Fadc3981ff85e462f911581d3257515d1?format=webp&width=800',
+            mw: 'https://cdn.builder.io/api/v1/image/assets%2Faeae393b121c48bc965ef344df5e7f0b%2Fdc484cef9de3499da4fb7a9d02546b46?format=webp&width=800',
+            nt: 'https://cdn.builder.io/api/v1/image/assets%2Faeae393b121c48bc965ef344df5e7f0b%2F487aa311fe8f4ed29511ac07aeeb0734?format=webp&width=800',
+            hm: 'https://cdn.builder.io/api/v1/image/assets%2Faeae393b121c48bc965ef344df5e7f0b%2Fa61efd48e15942918acb0253fb9f0584?format=webp&width=800',
+            ss: 'https://cdn.builder.io/api/v1/image/assets%2Faeae393b121c48bc965ef344df5e7f0b%2F38bf5e9eb3fa49d2aadb284949dfeab6?format=webp&width=800'
+        };
+        const descriptions = {
+            nf: 'Premium nootropic blend with Bacopa, Lion’s Mane, and L-Theanine to sharpen focus, clarity, and learning.',
+            cg: 'Chewable brain vitamins with B12, DHA, and Ginkgo to enhance recall, alertness, and stamina.',
+            ns: 'Advanced sleep formula with Melatonin, Valerian, and Magnesium for deeper, restorative sleep.',
+            cd: 'Fast-absorbing drops with Ashwagandha, Magnesium, and L-Theanine for calm balance without drowsiness.',
+            mc: 'Premium diffuser kit with lavender, bergamot, and sandalwood oils to relieve stress and sharpen calm focus.',
+            nc: 'Refreshing powdered drink with Caffeine, L-Tyrosine, and Rhodiola for clean energy and motivation.',
+            mw: 'Next‑gen EEG headband for real-time brainwave tracking and biofeedback for focus and calmness.',
+            nt: 'Handheld trainer with adaptive cognitive games that track progress and improve focus and memory.',
+            hm: 'Mood-boosting chews with 5‑HTP, Magnesium, and Vitamin D to support serotonin and balance.',
+            ss: 'Smart eye mask combining light therapy and gentle vibrations to guide natural sleep cycles.'
+        };
+        products.forEach(p=>{ if(images[p.id]) p.img = images[p.id]; if(descriptions[p.id]) p.desc = descriptions[p.id]; });
+
         const catalogTargets = {
             'Memory & Focus': document.getElementById('catalogMemory'),
             'Stress & Mood': document.getElementById('catalogStress'),
@@ -1279,16 +1338,19 @@ Overall cognitive efficiency appears optimal for assessment.`;
         function productCardHTML(p, relevance){
             const glow = relevance > 65 ? 'glow-high' : relevance > 40 ? 'glow-med' : 'glow-low';
             const badges = (p.badges||[]).slice(0,2).map(b=>`<span class="ai-badge">${b}</span>`).join('');
+            const desc = (p.desc || `${p.type} • ${p.regions.join(', ')}`);
+            const shortDesc = desc.length > 120 ? desc.slice(0, 120) + '…' : desc;
+            const media = p.img ? `<img class="product-image" src="${p.img}" alt="${p.name}">` : `<div class="product-holo">${p.icon||'✨'}</div>`;
             return `
             <div class="product-card ${glow}">
                 <div class="neural-lines"></div>
-                <div class="product-holo">${p.icon||'✨'}</div>
+                ${media}
                 <div class="card-head">
                     <div class="product-name">${p.name}</div>
                     <div class="price">$${p.price}</div>
                 </div>
                 <div class="ai-badges">${badges}</div>
-                <div class="meta">${p.type} • ${p.regions.join(', ')}</div>
+                <div class="meta">${shortDesc}</div>
                 <div class="card-actions">
                     <button class="btn btn-sm" data-add="${p.id}">Add to Cart</button>
                     <span>${Math.round(relevance)}% match</span>
@@ -1310,7 +1372,7 @@ Overall cognitive efficiency appears optimal for assessment.`;
                 if (typeKey && p.type !== typeKey) return;
                 if (discKey === 'deal' && !p.deal) return;
                 if (discKey === 'bundle' && !p.bundle) return;
-                if (search && !p.name.toLowerCase().includes(search)) return;
+                if (search && !(p.name.toLowerCase().includes(search) || (p.desc||'').toLowerCase().includes(search))) return;
                 const rel = scoreForGoal(p, profile) * 20; // normalize to ~0-100
                 catalogTargets[p.category].insertAdjacentHTML('beforeend', productCardHTML(p, rel));
             });
@@ -1323,6 +1385,44 @@ Overall cognitive efficiency appears optimal for assessment.`;
                 .sort((a,b)=>b.score-a.score)
                 .slice(0,3);
             area.innerHTML = top.map(t=>productCardHTML(t.p, t.score*20)).join('');
+        }
+
+        function renderFeaturedOffers(){
+            const area = document.getElementById('featured');
+            if (!area) return;
+            const byId = id => products.find(p=>p.id===id);
+            const offers = [
+                {name:'Focus & Study Bundle', save:25, items:['nf','cg','nt']},
+                {name:'Calm & Sleep Pack', save:20, items:['cd','mc','ns']},
+                {name:'Mood & Energy Duo', save:15, items:['nc','hm']}
+            ];
+            area.innerHTML = offers.map(o=>{
+                const items = o.items.map(byId);
+                const price = items.reduce((s,p)=>s+p.price,0);
+                const includes = items.map(i=>i.name).join(' • ');
+                return `<div class="offer-card">
+                    <div class="card-head"><div class="product-name">${o.name}</div><div class="price">Save ${o.save}%</div></div>
+                    <div class="meta">Includes: ${includes}</div>
+                    <div class="card-actions"><button class="btn btn-sm" data-offer="${o.items.join(',')}">Add Offer</button><span class="subtle">Est. $${price}</span></div>
+                </div>`;
+            }).join('');
+        }
+
+        function renderPersonalized(){
+            const area = document.getElementById('personalized');
+            if (!area) return;
+            const has = id => cart.some(p=>p.id===id);
+            const suggestions = [];
+            if (has('nf')) suggestions.push({text:'Bought NeuroFocus? Add Cogniva Gummies for dual memory support.', add:'cg'});
+            if (has('cd')) suggestions.push({text:'Using CalmNeuro? Add NeuroSleep Capsules for day‑to‑night relief.', add:'ns'});
+            if (has('nc')) suggestions.push({text:'On NeuroCharge? Get HappyMind Chews 50% off to balance mood.', add:'hm'});
+            if (!suggestions.length) {
+                // fallback to top recommendation
+                const prof = profile();
+                const top = [...products].sort((a,b)=>scoreForGoal(b,prof)-scoreForGoal(a,prof))[0];
+                suggestions.push({text:`Recommended today: ${top.name}`, add: top.id});
+            }
+            area.innerHTML = suggestions.map(s=>`<div class="offer-card"><div class="meta">${s.text}</div><div class="card-actions"><button class="btn btn-sm" data-add="${s.add}">Add</button></div></div>`).join('');
         }
 
         function renderBundles(profile){
@@ -1345,7 +1445,7 @@ Overall cognitive efficiency appears optimal for assessment.`;
                 const price = items.reduce((s,p)=>s+p.price,0);
                 area.insertAdjacentHTML('beforeend', `
                     <div class="bundle-card">
-                        <div class="card-head"><div class="product-name">${b.name}</div><div class="price">$${price} <small style="opacity:.8">(save 15%)</small></div></div>
+                        <div class="card-head"><div class="product-name">${b.name}</div><div class="price">$${price} <small class="subtle">(save 15%)</small></div></div>
                         <div class="meta">Includes: ${items.map(i=>i.name).join(' • ')}</div>
                         <div class="card-actions" style="margin-top:10px;">
                             <button class="btn btn-sm" data-bundle="${b.id}">Add Bundle</button>
@@ -1376,7 +1476,9 @@ Overall cognitive efficiency appears optimal for assessment.`;
             const prof = profile();
             renderCatalog(prof);
             renderRecommendations(prof);
+            renderFeaturedOffers();
             renderBundles(prof);
+            renderPersonalized();
             bindCardButtons();
             updateCheckoutChart();
         }
@@ -1406,11 +1508,13 @@ Overall cognitive efficiency appears optimal for assessment.`;
             const total = cart.reduce((s,p)=>s+p.price,0);
             cartTotal.textContent = total.toFixed(2);
             updateCheckoutChart();
+            renderPersonalized();
             cartList.querySelectorAll('[data-remove]').forEach(btn=> btn.addEventListener('click', e=> removeFromCart(+e.currentTarget.getAttribute('data-remove'))));
         }
         function bindCardButtons(){
             document.querySelectorAll('[data-add]').forEach(btn=> btn.addEventListener('click', e=> addToCartById(e.currentTarget.getAttribute('data-add'))));
             document.querySelectorAll('[data-bundle]').forEach(btn=> btn.addEventListener('click', e=> addBundle(e.currentTarget.getAttribute('data-bundle'))));
+            document.querySelectorAll('[data-offer]').forEach(btn=> btn.addEventListener('click', e=> e.currentTarget.getAttribute('data-offer').split(',').forEach(addToCartById)));
         }
 
         let checkoutChart;
