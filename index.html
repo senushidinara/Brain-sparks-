@@ -3,25 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cognitive Assessment Pro</title>
+    <title>NeuroBoutique Shop</title>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <style>
         :root {
-            --primary: #6c63ff;
-            --secondary: #4cc9f0;
-            --accent: #f72585;
-            --success: #4ade80;
-            --warning: #fbbf24;
-            --danger: #f87171;
-            --dark: #1e293b;
-            --darker: #0f172a;
+            --primary: #9b5de5;
+            --secondary: #00f5d4;
+            --accent: #f15bb5;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --dark: #0b1220;
+            --darker: #050814;
             --light: #f8fafc;
-            --pastel-blue: #a5b4fc;
-            --pastel-purple: #c7d2fe;
-            --pastel-pink: #fbcfe8;
-            --pastel-green: #bbf7d0;
-            --pastel-yellow: #fef3c7;
+            --pastel-blue: #9ecaff;
+            --pastel-purple: #c4b5fd;
+            --pastel-pink: #f8b4d9;
+            --pastel-green: #b7f0c0;
+            --pastel-yellow: #fde68a;
         }
         
         * {
@@ -120,7 +120,7 @@
         }
         
         .panel:hover {
-            transform: translateY(-5px);
+            transform: scale(1.01);
         }
         
         .panel-header {
@@ -225,7 +225,7 @@
         }
         
         .wave-card:hover {
-            transform: translateY(-5px);
+            transform: scale(1.02);
         }
         
         .wave-value {
@@ -341,7 +341,7 @@
         }
         
         .export-option:hover {
-            transform: translateY(-5px);
+            transform: scale(1.02);
             border-color: var(--primary);
             box-shadow: 0 5px 15px rgba(108, 99, 255, 0.3);
         }
@@ -413,15 +413,32 @@
                 font-size: 2.5rem;
             }
         }
+        /* Utility classes to replace inline styles */
+        .action-buttons { margin-top: 20px; display: flex; gap: 15px; }
+        .insight-text { margin-bottom: 15px; }
+        .kpi-grid { display: grid; gap: 12px; }
+        .kpi-header { display: flex; justify-content: space-between; margin-bottom: 5px; }
+        .kpi-track { height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; overflow: hidden; }
+        .kpi-fill { height: 100%; width: 0; border-radius: 4px; transition: width 0.5s ease; }
+        .kpi-fill.ok { background: var(--success); }
+        .kpi-fill.warn { background: var(--warning); }
+        .kpi-fill.bad { background: var(--danger); }
+        .balance-row { display: flex; align-items: center; gap: 10px; }
+        .balance-score { font-size: 2rem; font-weight: bold; }
+        .score-good { color: var(--success); }
+        .score-mid { color: var(--warning); }
+        .score-bad { color: var(--danger); }
+        .anomaly-title { color: var(--danger); margin-bottom: 15px; }
+        .anomaly-ok { color: var(--success); }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Cognitive Assessment Pro</h1>
-            <p class="subtitle">Advanced Brainwave Analysis Platform with Cognitive Diagnostics</p>
+            <h1>NeuroBoutique Shop</h1>
+            <p class="subtitle">Where Science Meets Luxury — Your Personalized Brain Wellness Destination</p>
             <div class="status-badge">
-                Analysis Mode Active • Real-time Neural Processing
+                AI Concierge Ready • Personalized Recommendations
             </div>
         </header>
         
@@ -440,7 +457,7 @@
                 
                 <textarea id="neuralInput" placeholder="Describe your cognitive state, emotional experience, or paste EEG data..."></textarea>
                 
-                <div class="button-group" style="margin-top: 20px; display: flex; gap: 15px;">
+                <div class="action-buttons">
                     <button class="btn" id="analyzeBtn">
                         <span>🔍</span> Analyze Brain Patterns
                     </button>
@@ -550,31 +567,8 @@
             </div>
             
             <textarea id="exportOutput" readonly>[Cognitive Assessment Report]
-Date: 2025-08-07
-Time: 14:30:45 GMT+5:30
-Session ID: CA-5F2D-88A4-CB91
 
 [Start Analysis]
-Cognitive State: 🌀 Enhanced Focus (Gamma: 0.82)
-Emotional Baseline: 😌 Calm (Alpha: 0.75)
-Cognitive Efficiency: ⚡ 92% (Optimal Range)
-Stress Index: ✅ 18 (Low)
-Cognitive Load: 📊 63% (Moderate)
-
-[Brainwave Profile]
-Delta: 0.15 | Theta: 0.28 | Alpha: 0.75 | Beta: 0.68 | Gamma: 0.82
-
-[Advanced Metrics]
-- Focus Continuity: 89% (Excellent)
-- Cognitive Flexibility: 76% (High)
-- Neural Entropy: 0.42 (Stable)
-- Hemispheric Sync: 0.91 (Balanced)
-
-[Diagnostic Notes]
-- Strong gamma coherence indicates insight processing
-- Optimal alpha-beta ratio for problem-solving
-- Minimal cognitive fatigue detected
-- Recommended: Maintain current cognitive strategy
 
 [End Report]</textarea>
             
@@ -649,8 +643,7 @@ Delta: 0.15 | Theta: 0.28 | Alpha: 0.75 | Beta: 0.68 | Gamma: 0.82
             document.getElementById('saveImage').addEventListener('click', saveAsImage);
             document.getElementById('exportJSON').addEventListener('click', exportJSON);
             
-            // Load sample analysis
-            setTimeout(loadSampleAnalysis, 1500);
+            // No auto-analysis on load to avoid output without input
         });
         
         function initChart() {
@@ -704,11 +697,6 @@ Delta: 0.15 | Theta: 0.28 | Alpha: 0.75 | Beta: 0.68 | Gamma: 0.82
             });
         }
         
-        function loadSampleAnalysis() {
-            // Simulate loading of sample data
-            simulateEEGData();
-            generateFullReport();
-        }
         
         function analyzeInput() {
             const text = neuralInput.value.trim();
@@ -821,7 +809,7 @@ Delta: 0.15 | Theta: 0.28 | Alpha: 0.75 | Beta: 0.68 | Gamma: 0.82
             }
             
             cognitiveState.innerHTML = `
-                <div style="margin-bottom: 15px;">${cognitiveStateText}</div>
+                <div class="insight-text">${cognitiveStateText}</div>
                 ${cognitiveTag}
                 <span class="tag tag-neutral">Gamma: ${(values.gamma * 100).toFixed(0)}%</span>
                 <span class="tag tag-neutral">Alpha: ${(values.alpha * 100).toFixed(0)}%</span>
@@ -833,38 +821,39 @@ Delta: 0.15 | Theta: 0.28 | Alpha: 0.75 | Beta: 0.68 | Gamma: 0.82
             const stressIndex = Math.min(100, (1 - values.alpha) * 60 + (values.beta * 20));
             
             performanceMetrics.innerHTML = `
-                <div style="display: grid; gap: 12px;">
-                    <div>
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                <div class="kpi-grid">
+                    <div class="kpi-item">
+                        <div class="kpi-header">
                             <span>Cognitive Efficiency:</span>
                             <span><strong>${neuralEfficiency.toFixed(0)}%</strong></span>
                         </div>
-                        <div style="height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px;">
-                            <div style="height: 100%; width: ${neuralEfficiency}%; background: ${neuralEfficiency > 70 ? '#4ade80' : neuralEfficiency > 40 ? '#fbbf24' : '#f87171'}; border-radius: 4px;"></div>
-                        </div>
+                        <div class="kpi-track"><div class="kpi-fill" id="kpi-eff"></div></div>
                     </div>
-                    
-                    <div>
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                    <div class="kpi-item">
+                        <div class="kpi-header">
                             <span>Cognitive Load:</span>
                             <span><strong>${cognitiveLoad.toFixed(0)}%</strong></span>
                         </div>
-                        <div style="height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px;">
-                            <div style="height: 100%; width: ${cognitiveLoad}%; background: ${cognitiveLoad < 40 ? '#4ade80' : cognitiveLoad < 70 ? '#fbbf24' : '#f87171'}; border-radius: 4px;"></div>
-                        </div>
+                        <div class="kpi-track"><div class="kpi-fill" id="kpi-load"></div></div>
                     </div>
-                    
-                    <div>
-                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                    <div class="kpi-item">
+                        <div class="kpi-header">
                             <span>Stress Index:</span>
                             <span><strong>${stressIndex.toFixed(0)}</strong></span>
                         </div>
-                        <div style="height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px;">
-                            <div style="height: 100%; width: ${stressIndex}%; background: ${stressIndex < 30 ? '#4ade80' : stressIndex < 50 ? '#fbbf24' : '#f87171'}; border-radius: 4px;"></div>
-                        </div>
+                        <div class="kpi-track"><div class="kpi-fill" id="kpi-stress"></div></div>
                     </div>
                 </div>
             `;
+            const effEl = document.getElementById('kpi-eff');
+            const loadEl = document.getElementById('kpi-load');
+            const stressEl = document.getElementById('kpi-stress');
+            effEl.style.width = neuralEfficiency + '%';
+            loadEl.style.width = cognitiveLoad + '%';
+            stressEl.style.width = Math.min(100, Math.max(0, stressIndex)) + '%';
+            effEl.classList.add(neuralEfficiency > 70 ? 'ok' : neuralEfficiency > 40 ? 'warn' : 'bad');
+            loadEl.classList.add(cognitiveLoad < 40 ? 'ok' : cognitiveLoad < 70 ? 'warn' : 'bad');
+            stressEl.classList.add(stressIndex < 30 ? 'ok' : stressIndex < 50 ? 'warn' : 'bad');
             
             // Balance Profile
             const balanceScore = (values.alpha / (values.beta + 0.01) * 50) + 
@@ -879,12 +868,11 @@ Delta: 0.15 | Theta: 0.28 | Alpha: 0.75 | Beta: 0.68 | Gamma: 0.82
                 balanceText = '⚠️ <strong>Suboptimal Neural Balance</strong><br>Significant imbalance detected - consider interventions.';
             }
             
+            const scoreClass = balanceScore > 75 ? 'score-good' : balanceScore > 50 ? 'score-mid' : 'score-bad';
             balanceProfile.innerHTML = `
-                <div style="margin-bottom: 15px;">${balanceText}</div>
-                <div style="display: flex; align-items: center; gap: 10px;">
-                    <div style="font-size: 2rem; font-weight: bold; color: ${balanceScore > 75 ? '#4ade80' : balanceScore > 50 ? '#fbbf24' : '#f87171'}">
-                        ${balanceScore.toFixed(0)}
-                    </div>
+                <div class="insight-text">${balanceText}</div>
+                <div class="balance-row">
+                    <div class="balance-score ${scoreClass}">${balanceScore.toFixed(0)}</div>
                     <div>
                         Balance Score (0-100)<br>
                         <small>Higher scores indicate better cognitive equilibrium</small>
@@ -913,16 +901,16 @@ Delta: 0.15 | Theta: 0.28 | Alpha: 0.75 | Beta: 0.68 | Gamma: 0.82
             
             let anomalyHTML = '';
             if (anomalies.length > 0) {
-                anomalyHTML = '<div style="color: #f87171; margin-bottom: 15px;">⚠️ <strong>Cognitive Anomalies Detected</strong></div>';
-                anomalyHTML += '<ul style="padding-left: 20px;">';
+                anomalyHTML = '<div class="anomaly-title">⚠️ <strong>Cognitive Anomalies Detected</strong></div>';
+                anomalyHTML += '<ul class="anomaly-list">';
                 anomalies.forEach(a => {
                     anomalyHTML += `<li>${a}</li>`;
                 });
                 anomalyHTML += '</ul>';
             } else {
-                anomalyHTML = '<div style="color: #4ade80;">✅ <strong>No Significant Anomalies Detected</strong></div>';
+                anomalyHTML = '<div class="anomaly-ok">✅ <strong>No Significant Anomalies Detected</strong></div>';
             }
-            
+
             anomalyDetection.innerHTML = anomalyHTML;
         }
         
@@ -1018,9 +1006,14 @@ Overall cognitive efficiency appears optimal for assessment.`;
         
         // Export functions
         function copyText() {
-            exportOutput.select();
-            document.execCommand('copy');
-            alert('Report copied to clipboard!');
+            const text = exportOutput.value;
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(() => alert('Report copied to clipboard!'));
+            } else {
+                exportOutput.select();
+                document.execCommand('copy');
+                alert('Report copied to clipboard!');
+            }
         }
         
         function downloadCSV() {
